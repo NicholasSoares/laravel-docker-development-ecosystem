@@ -54,14 +54,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY composer.json composer.json
 COPY composer.lock composer.lock
 
-# Install composer application dependencies
-RUN composer install \
-    --ignore-platform-reqs \
-    --no-interaction \
-    --no-plugins \
-    --no-scripts \
-    --prefer-dist
-
 # Copy existing application directory contents to the working directory
 COPY . /var/www/html
 
@@ -73,6 +65,9 @@ USER www-data
 
 # configure node dependent resources with application default user
 RUN npm run prod
+
+# Install composer application dependencies
+RUN composer install
 
 # HEALTHCHECK setup
 HEALTHCHECK --interval=30s --timeout=3s \
