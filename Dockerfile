@@ -50,6 +50,18 @@ RUN docker-php-ext-install gd
 # Install composer (php package manager)
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Copy existing application directory composer dependency filers
+COPY composer.json composer.json
+COPY composer.lock composer.lock
+
+# Install composer application dependencies
+RUN composer install \
+    --ignore-platform-reqs \
+    --no-interaction \
+    --no-plugins \
+    --no-scripts \
+    --prefer-dist
+
 # Copy existing application directory contents to the working directory
 COPY . /var/www/html
 
