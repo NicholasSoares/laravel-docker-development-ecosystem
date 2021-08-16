@@ -69,10 +69,6 @@ RUN npm run prod
 # Install composer application dependencies
 RUN composer install
 
-# HEALTHCHECK setup
-HEALTHCHECK --interval=30s --timeout=3s \
-  CMD curl -f http://localhost/ || exit 1
-
 # Expose port 9000 and start php-fpm server (for FastCGI Process Manager)
 EXPOSE 9000
 
