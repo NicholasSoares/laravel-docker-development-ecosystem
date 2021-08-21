@@ -10,4 +10,4 @@ set +e
 sudo groupadd www-data
 sudo usermod -aG www-data $USER
 sudo chown -R $USER:www-data .
-sudo chmod -R g+rwx .
+sudo chmod -R g+rwxs .

@@ -1,18 +1,19 @@
 version: '3.8'
 services:
-    app:
+    laravel:
         build:
             args:
-                user: www-data
+                user: $USER
+                group: www-data
             context: .
             dockerfile: Dockerfile
         command: sh -c "composer install && npm install && npm run prod && php-fpm -F"
         image: applaravel
-        container_name: app
+        container_name: laravel
         restart: unless-stopped
         tty: true
         environment:
-            SERVICE_NAME: app
+            SERVICE_NAME: laravel
             SERVICE_TAGS: dev
             working_dir: /var/www/
         volumes:
@@ -21,9 +22,9 @@ services:
         networks:
             - app-network
 
-    webserver:
+    nginx:
         image: nginx:alpine
-        container_name: webserver
+        container_name: nginx
         restart: unless-stopped
         tty: true
         ports:
@@ -35,9 +36,9 @@ services:
         networks:
             - app-network
 
-    db:
+    mysql:
         image: mysql:5.7.32
-        container_name: db
+        container_name: mysql_server
         restart: unless-stopped
         tty: true
         ports:
@@ -52,10 +53,10 @@ services:
             - ./mysql/my.cnf:/etc/mysql/my.cnf
         networks:
             - app-network
-    cache:
+    redis:
         image: redis:latest
         hostname: cache
-        container_name: redis_cache
+        container_name: redis_server
         restart: unless-stopped
 
 networks:
