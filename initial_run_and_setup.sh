@@ -11,13 +11,10 @@ set +e
 sudo groupadd www-data
 sudo usermod -aG www-data $USER
 sudo chown -R $USER:www-data .
-sudo chmod -R g+rw .
+sudo chmod -R g+rwx .
 
 #Setup docker dependencies
-docker run --rm -v $(pwd):/app composer install
 ln -sf .env.docker .env
 
 #Build docker images and run
 docker-compose up --build
-
-#docker exec app /bin/bash -c "cp .env.example .env && php artisan key:generate"
