@@ -8,10 +8,7 @@ fi
 set +e
 
 #Setup user enviroment to match server runtime enviroment
-sudo groupadd www-data
-sudo usermod -aG www-data $USER
-sudo chown -R $USER:www-data .
-sudo chmod -R g+rwx .
+source normalize_files_ownership.sh
 
 #Setup docker dependencies
 ln -sf .env.docker .env
