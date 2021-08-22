@@ -1,4 +1,4 @@
-# Laravel Docker Ecosystem For Devs
+# Laravel Docker Development Ecosystem For Devs
 
 The main goal here is to develop a set of tools and docker configurations to fully serve the needs of an Laravel 8 application, including Redis, MySQL and Node.Js compiler tools.
 
