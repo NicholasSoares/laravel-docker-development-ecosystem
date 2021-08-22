@@ -7,7 +7,7 @@ services:
                 group: www-data
             context: .
             dockerfile: Dockerfile
-        command: sh -c "composer install && npm install && npm run prod && php-fpm -F"
+        command: sh -c "composer update && npm install && npm run prod && php-fpm -F"
         image: applaravel
         container_name: laravel
         restart: unless-stopped
